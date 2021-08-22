@@ -1,0 +1,102 @@
+<!-- Codes by HTML.am -->
+
+<!-- CSS Code -->
+<style type="text/css" scoped>
+
+#main {
+    /* border: 0.5px solid; */
+    background: #000000;
+    width: 100%;
+    overflow: hidden;
+}
+  
+.GeneratedMarquee {
+    font-family:Consolas, monospace;
+    font-size:2em;
+    font-weight: bold;
+    line-height:0.01em;
+    color:#00CC99;
+    padding:1em;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+</style>
+
+<!-- Ref: https://www.geeksforgeeks.org/create-the-marquee-text-effect-using-javascript/ -->
+
+<!-- HTML Code -->
+<!-- <marquee id="customMarquee" class="GeneratedMarquee" direction="left" scrollamount="14" behavior="scroll"></marquee> -->
+<div id="main">
+    <h2 id="customMarquee" class="GeneratedMarquee"></h2>
+</div>
+
+<form action="https://marquee.halloworldis.me?options=law" method="GET"></form>
+
+<script>
+
+function animate(element) {
+    let elementWidth = element.offsetWidth;
+    let parentWidth = element.parentElement.offsetWidth;
+    let flag = parentWidth;
+
+    
+    // console.log(element.getBoundingClientRect());
+
+    setInterval(() => {
+        element.style.marginLeft = --flag + "px";
+
+        if (elementWidth == -flag) {
+            flag = parentWidth;
+        }
+        
+    }, 5);
+}
+
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+
+const marquee = document.getElementById("customMarquee");
+if( findGetParameter("options") === "law" )
+{
+    marquee.innerHTML = "中華民國刑法第 三十六 章 妨害電腦使用罪 \
+    第 358 條 \
+    無故輸入他人帳號密碼、破解使用電腦之保護措施或利用電腦系統之漏洞\
+    ，而入侵他人之電腦或其相關設備者，處三年以下有期徒刑、拘役或科或\
+    併科十萬元以下罰金。\
+    第 359 條\
+    無故取得、刪除或變更他人電腦或其相關設備之電磁紀錄，致生損害於公\
+    眾或他人者，處五年以下有期徒刑、拘役或科或併科二十萬元以下罰金。\
+    第 360 條\
+    無故以電腦程式或其他電磁方式干擾他人電腦或其相關設備，致生損害於\
+    公眾或他人者，處三年以下有期徒刑、拘役或科或併科十萬元以下罰金。\
+    第 361 條\
+    對於公務機關之電腦或其相關設備犯前三條之罪者，加重其刑至二分之一\
+    。\
+    第 362 條\
+    製作專供犯本章之罪之電腦程式，而供自己或他人犯本章之罪，致生損害\
+    於公眾或他人者，處五年以下有期徒刑、拘役或科或併科二十萬元以下罰\
+    金。\
+    第 363 條\
+    第三百五十八條至第三百六十條之罪，須告訴乃論。";
+}
+else if ( findGetParameter("options") === "custom" )
+{
+    marquee.innerText = findGetParameter("content");
+}
+animate(marquee);
+
+</script>
+
+
